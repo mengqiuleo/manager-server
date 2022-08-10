@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-10 20:34:11
- * @LastEditTime: 2022-08-10 22:20:28
+ * @LastEditTime: 2022-08-11 03:07:47
  */
 const Koa = require('koa')
 const app = new Koa()
@@ -12,11 +12,15 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const log4js = require('./utils/log4j')
 
-const index = require('./routes/index')
+const router = require('koa-router')()
+
 const users = require('./routes/users')
 
 // error handler
 onerror(app)
+
+//# 加载数据库
+require('./config/db')
 
 // middlewares
 app.use(bodyparser({
@@ -37,11 +41,14 @@ app.use(views(__dirname + '/views', {
 // logger
 app.use(async (ctx, next) => {
   await next()
-  log4js.info(`log output`)
+  log4js.info(`get params: ${ JSON.stringify(ctx.request.query) }`)
+  log4js.info(`post params: ${ JSON.stringify(ctx.request.body) }`)
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
+router.prefix('/api')
+
+router.use(users.routes(), users.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 
 // error-handling

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-10 22:50:42
- * @LastEditTime: 2022-08-10 22:57:55
+ * @LastEditTime: 2022-08-11 02:41:48
  */
 const log4js = require('./log4j')
 const CODE  = {
@@ -34,7 +34,7 @@ module.exports = {
     }
   },
 
-  fail(msg = '', code = CODE.BUSINESS_ERROR){
+  fail(msg = '', data = '', code = CODE.BUSINESS_ERROR){
     log4js.debug(msg);
     return {
       code, data, msg
