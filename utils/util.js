@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-10 22:50:42
- * @LastEditTime: 2022-08-11 02:41:48
+ * @LastEditTime: 2022-08-11 21:51:40
  */
 const log4js = require('./log4j')
 const CODE  = {
@@ -39,5 +39,6 @@ module.exports = {
     return {
       code, data, msg
     }
-  }
+  },
+  CODE
 }
